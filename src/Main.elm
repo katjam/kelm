@@ -1,78 +1,70 @@
+module Main exposing (main)
+
+import Base exposing (Base)
+import Browser
 import Html exposing (..)
-import Html.Attributes exposing (..)
---import Html.Events exposing (..)
-import Navigation
+import Html.Events exposing (..)
 
 
-main : Program Never Model Msg
+type alias Flags =
+    ()
+
+
+main : Program Flags Model Msg
 main =
-    Navigation.program UrlChange
+    Browser.document
         { init = init
-        , view = view
         , update = update
-        , subscriptions = (\_ -> Sub.none)
+        , subscriptions = subscriptions
+        , view = viewDocument
         }
 
 
-
--- MODEL
-
-
 type alias Model =
-    { history : List Navigation.Location
+    { base : Base
     }
 
 
-init : Navigation.Location -> ( Model, Cmd Msg )
-init location =
-    ( Model [ location ]
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( { base =
+            Base.init
+      }
     , Cmd.none
     )
 
 
-
--- UPDATE
-
-
 type Msg
-    = UrlChange Navigation.Location
+    = DoAction
 
 
-{- We are just storing the location in our history in this example, but
-normally, you would use a package like evancz/url-parser to parse the path
-or hash into nicely structured Elm values.
-
-    <http://package.elm-lang.org/packages/evancz/url-parser/latest>
-
--}
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        UrlChange location ->
-            ( { model | history = location :: model.history }
+        DoAction ->
+            ( { model | base = { value = model.base.value + 1 } }
             , Cmd.none
             )
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
--- VIEW
+
+viewDocument : Model -> Browser.Document Msg
+viewDocument model =
+    { title = "Kelm App", body = [ view model ] }
 
 
-view : Model -> Html msg
+view : Model -> Html Msg
 view model =
-    div []
-        [ h1 [] [ text "Pages" ]
-        , ul [] (List.map viewLink [ "bears", "cats", "dogs", "elephants", "fish" ])
-        , h1 [] [ text "History" ]
-        , ul [] (List.map viewLocation model.history)
+    div
+        []
+        [ text "Base template "
+        , Html.button
+            [ Html.Events.onClick DoAction
+            ]
+            [ text "Do action!" ]
+        , Base.view model.base
         ]
-
-
-viewLink : String -> Html msg
-viewLink name =
-    li [] [ a [ href ("#" ++ name) ] [ text name ] ]
-
-
-viewLocation : Navigation.Location -> Html msg
-viewLocation location =
-    li [] [ text (location.pathname ++ location.hash) ]
