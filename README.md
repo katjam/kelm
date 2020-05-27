@@ -3,18 +3,17 @@
 ### Prerequisites
 Follow official install instructions for your setup:
 - [Elm](http://elm-lang.org/) 0.19
-- yarn
 - node
 - [Parcel](https:://parceljs.org) Builds and bundles the app, runs dev server.
 
 ### Development build
-- `yarn start` for a hot-reload dev server
+- `npm start` for a hot-reload dev server
 
 ### Tests
-- `yarn test`
+- `npm test`
 
 ### Production build
-- `yarn build`
+- `npm run build`
 
 ### Deploy to GitHub pages with Travis
 We're using [Travis](https://travis-ci.org).
