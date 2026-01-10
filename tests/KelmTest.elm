@@ -1,8 +1,8 @@
 module KelmTest exposing (suite)
 
 import Base
-import Expect exposing (Expectation)
-import Test exposing (..)
+import Expect
+import Test exposing (Test, describe, test)
 
 
 suite : Test

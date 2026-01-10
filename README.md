@@ -4,16 +4,15 @@
 Follow official install instructions for your setup:
 - [Elm](http://elm-lang.org/) 0.19
 - node
-- yarn
 
 ### Development build
-- `yarn start` for a hot-reload dev server
+- `npm run dev` for a hot-reload dev server
 
 ### Tests
-- `yarn test`
+- `npm run test`
 
 ### Production build
-- `yarn build`
+- `npm run build`
 
 ### Deployment
 #### Needs to be configured in settings

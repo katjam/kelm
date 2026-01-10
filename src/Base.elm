@@ -1,8 +1,6 @@
 module Base exposing (Base, init, view)
 
-import Html exposing (..)
-import Html.Attributes
-import Html.Events
+import Html exposing (Html, text)
 
 
 type alias Base =

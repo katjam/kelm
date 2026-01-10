@@ -1,9 +1,9 @@
-module Main exposing (main)
+module Main exposing (Flags, Model, Msg, main)
 
 import Base exposing (Base)
 import Browser
-import Html exposing (..)
-import Html.Events exposing (..)
+import Html exposing (Html, div, text)
+import Html.Events
 
 
 type alias Flags =
@@ -48,7 +48,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
